@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 const App = () => {
 
   const [status, setStatus] = useState('off');
-  const [time, setTime] = useState (5);
+  const [time, setTime] = useState (1200);
   const [timer, setTimer] = useState(null);
 
   const formatTime = (seconds) => {
@@ -26,9 +26,11 @@ const App = () => {
         setStatus('rest');
         setTime(20)
         clearInterval(timeGo);
+        playBell();
       }
       else {
         startTimer();
+        playBell();
       }
     }
 
@@ -39,18 +41,24 @@ const App = () => {
   
   const startTimer = () => {
     setTimer(true);
-    setTime(5);
+    setTime(1200);
     setStatus('work');
   }
 
   const stopTimer = () => {
-    setTimer(null)
-    setTime(0);
+    setTimer(null);
+    setTime(1200);
     setStatus('off');
   }
 
   const closeApp = () => {
     window.close();
+  }
+
+  const playBell = () => {
+    const audio = new Audio ('./sounds/bell.wav');
+    console.log(audio);
+    audio.play();
   }
 
     return (
